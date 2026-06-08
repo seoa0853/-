@@ -1,0 +1,6 @@
+{
+  "name": "친구 약속 조율 캘린더",
+  "description": "세 명의 친구가 서로 가능한 날짜를 조율하고 모두가 가능한 날짜를 노란색으로 찾아주는 스마트 달력 약속 잡기 서비스입니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

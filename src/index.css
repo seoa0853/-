@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #073B4C;
+  --color-brand-secondary: #118AB2;
+  --color-brand-success: #06D6A0;
+  --color-brand-warning: #FFD166;
+  --color-brand-danger: #EF476F;
+  --color-brand-bg: #FEF9EF;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:wght@400;600;800;900&display=swap');
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-brand-bg);
+}
+
