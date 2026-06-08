@@ -60,7 +60,7 @@ export const StatsView: React.FC<StatsViewProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-[32px] border-8 border-brand-primary shadow-2xl p-6 flex flex-col gap-6" id="stats-card">
+    <div className="bg-white rounded-2xl sm:rounded-[32px] border-4 sm:border-8 border-brand-primary shadow-2xl p-4 sm:p-6 flex flex-col gap-6" id="stats-card">
       <div>
         <h3 className="text-xl font-black text-brand-primary flex items-center gap-2">
           <Award className="h-6 w-6 text-brand-warning fill-brand-warning" />

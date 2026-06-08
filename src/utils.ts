@@ -15,6 +15,18 @@ export const FRIEND_PALETTE = [
   { id: 'friend5', defaultName: '친구 5', color: 'teal', dotColor: '#14b8a6' },
   { id: 'friend6', defaultName: '친구 6', color: 'cyan', dotColor: '#06b6d4' },
   { id: 'friend7', defaultName: '친구 7', color: 'rose', dotColor: '#f43f5e' },
+  { id: 'friend8', defaultName: '친구 8', color: 'sky', dotColor: '#0ea5e9' },
+  { id: 'friend9', defaultName: '친구 9', color: 'orange', dotColor: '#f97316' },
+  { id: 'friend10', defaultName: '친구 10', color: 'lime', dotColor: '#84cc16' },
+  { id: 'friend11', defaultName: '친구 11', color: 'fuchsia', dotColor: '#d946ef' },
+  { id: 'friend12', defaultName: '친구 12', color: 'purple', dotColor: '#a855f7' },
+  { id: 'friend13', defaultName: '친구 13', color: 'yellow', dotColor: '#eab308' },
+  { id: 'friend14', defaultName: '친구 14', color: 'blue', dotColor: '#3b82f6' },
+  { id: 'friend15', defaultName: '친구 15', color: 'red', dotColor: '#ef4444' },
+  { id: 'friend16', defaultName: '친구 16', color: 'stone', dotColor: '#78716c' },
+  { id: 'friend17', defaultName: '친구 17', color: 'green', dotColor: '#22c55e' },
+  { id: 'friend18', defaultName: '친구 18', color: 'slate', dotColor: '#64748b' },
+  { id: 'friend19', defaultName: '친구 19', color: 'zinc', dotColor: '#71717a' },
 ];
 
 export const DEFAULT_FRIENDS: Friend[] = [
@@ -26,7 +38,7 @@ export const DEFAULT_FRIENDS: Friend[] = [
 // 지정한 인원수에 맞춰 친구 목록을 동적으로 조립/성장/축소 시키는 헬퍼
 export function createFriendsForCount(count: number, existingFriends: Friend[] = []): Friend[] {
   const result: Friend[] = [];
-  const safeCount = Math.min(Math.max(count, 2), 8); // 최소 2명, 최대 8명 제한
+  const safeCount = Math.min(Math.max(count, 2), 20); // 최소 2명, 최대 20명 제한
   
   for (let i = 0; i < safeCount; i++) {
     const preset = FRIEND_PALETTE[i] || { id: `friend${i}`, defaultName: `친구 ${i}`, color: 'slate', dotColor: '#64748b' };

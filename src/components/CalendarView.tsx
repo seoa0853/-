@@ -50,7 +50,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
     : (friends.find(f => f.id === activeFriendId)?.name || '나');
 
   return (
-    <div className="bg-white rounded-[32px] border-8 border-brand-primary shadow-2xl p-6 sm:p-8" id="calendar-card">
+    <div className="bg-white rounded-2xl sm:rounded-[32px] border-4 sm:border-8 border-brand-primary shadow-2xl p-4 sm:p-8" id="calendar-card">
       
       {/* 캘린더 상단 상호작용 바 */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b-4 border-brand-primary">
@@ -105,35 +105,35 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
       </div>
 
       {/* 실시간 범례 설명 */}
-      <div className="bg-brand-bg rounded-2xl p-4 my-5 text-xs text-brand-primary border-4 border-brand-primary">
-        <p className="font-black text-brand-primary mb-2.5 flex items-center gap-1.5">
+      <div className="bg-brand-bg rounded-2xl p-3 sm:p-4 my-4 sm:my-5 text-xs text-brand-primary border-4 border-brand-primary">
+        <p className="font-black text-brand-primary mb-2 flex items-center gap-1.5">
           <Info className="h-4.5 w-4.5 text-brand-secondary" />
           <span>캘린더 디자인 범례 가이드</span>
         </p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 text-[11px] font-bold">
-          <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border-2 border-brand-primary">
-            <span className="w-3.5 h-3.5 rounded-full bg-brand-success border-2 border-brand-primary block shadow-sm flex-shrink-0"></span>
-            <span className="truncate">가능한 날 <b className="text-brand-success font-black">(Green)</b></span>
-          </div>
-          <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border-2 border-brand-primary">
-            <span className="w-3.5 h-3.5 rounded-full bg-brand-danger border-2 border-brand-primary block shadow-sm flex-shrink-0"></span>
-            <span className="truncate">불가능 <b className="text-brand-danger font-black">(Red)</b></span>
-          </div>
-          <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border-2 border-brand-primary">
-            <span className="w-3.5 h-3.5 rounded bg-brand-warning border-2 border-brand-primary block shadow-sm flex-shrink-0 flex items-center justify-center">
+        <div className="grid grid-cols-3 gap-2 text-[11px] font-bold">
+          <div className="flex items-center gap-1.5 bg-white px-2 py-1.5 rounded-xl border-2 border-brand-primary">
+            <span className="w-3 h-3 rounded bg-brand-warning border-2 border-brand-primary block shadow-sm flex-shrink-0 flex items-center justify-center">
               <Star className="h-2 w-2 text-brand-primary fill-brand-primary" />
             </span>
             <span className="truncate">모두 가능 <b className="text-amber-600 font-black">(Yellow)</b></span>
           </div>
-          <div className="flex items-center gap-2 bg-white px-2.5 py-1.5 rounded-xl border-2 border-brand-primary">
-            <span className="w-3.5 h-3.5 rounded bg-white border-2 border-slate-200 block shadow-sm flex-shrink-0"></span>
-            <span className="truncate">미정 / 빈 날짜 <span className="text-slate-400 font-normal">(White)</span></span>
+          <div className="flex items-center gap-1.5 bg-white px-2 py-1.5 rounded-xl border-2 border-brand-primary">
+            <span className="w-3 h-3 rounded-full bg-brand-danger border-2 border-brand-primary block shadow-sm flex-shrink-0"></span>
+            <span className="truncate">불가 <b className="text-brand-danger font-black">(Red)</b></span>
+          </div>
+          <div className="flex items-center gap-1.5 bg-white px-2 py-1.5 rounded-xl border-2 border-brand-primary">
+            <span className="w-3 h-3 rounded bg-white border-2 border-slate-200 block shadow-sm flex-shrink-0"></span>
+            <span className="truncate">미정 <span className="text-slate-400 font-normal">(White)</span></span>
           </div>
         </div>
         
-        {activeFriendId !== 'all' && (
-          <p className="text-[10px] text-brand-primary font-bold mt-2.5 bg-brand-warning/20 p-2 rounded-xl border-2 border-brand-primary/40">
-            💡 팁: 현재 <strong className="font-extrabold">{activeFriendName}</strong>님의 일정을 편집하는 중입니다. 날짜를 한 번 누르면 선택되고, <b>더블클릭</b>하면 [미정 ➡️ 가능 ➡️ 불가능] 순서로 즉시 기입됩니다!
+        {activeFriendId !== 'all' ? (
+          <p className="text-[10px] text-brand-primary font-bold mt-2.5 bg-brand-warning/20 p-2.5 rounded-xl border-2 border-brand-primary/40 leading-relaxed">
+            💡 <b>모바일 최적화 터치</b>: 날짜를 한 번 선택(터치)하면 하단 편집 패널로 즉시 화면이 이동합니다! PC 사용자는 날짜를 <b>더블클릭</b>하여 [미정 ➡️ 가능 ➡️ 불가]를 바로 토글할 수 있습니다.
+          </p>
+        ) : (
+          <p className="text-[10px] text-brand-primary font-bold mt-2.5 bg-brand-warning/20 p-2.5 rounded-xl border-2 border-brand-primary/40 leading-relaxed">
+            💡 <b>종합 현황 가이드</b>: 모든 참여 멤버가 <b>'가능(Green)'</b>일 때만 노란색(모두 가능⭐)으로 표기되며, 하나라도 답변이 다르거나 미정이면 자동으로 <b>'불가능(빨간색)'</b>으로 표시됩니다!
           </p>
         )}
       </div>
@@ -177,8 +177,8 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
               </span>
             );
           } 
-          // 종합뷰 모드일 때 한 명이라도 불가능하면 빨간색(불가능한 날)으로 보이고 가독성을 위해 흰색 글자 적용
-          else if (activeFriendId === 'all' && summary.isAnyUnavailable) {
+          // 종합뷰 모드일 때 모든 참여자가 '가능'이 아니라면 '불가능(빨간색)'으로 가속 표시 (단 완전히 답변이 없는 기입 전 상태는 제외)
+          else if (activeFriendId === 'all' && !summary.isAllAvailable && (summary.availableCount > 0 || summary.unavailableCount > 0)) {
             cellBgClass = 'bg-brand-danger text-white hover:opacity-90 border-2 border-brand-primary shadow-sm';
             textClass = 'text-white font-black';
           }
@@ -212,7 +212,10 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
           const isSat = cell.date.getDay() === 6;
           
           let dayLabelColor = textClass;
-          if (!summary.isAllAvailable && !(activeFriendId === 'all' && summary.isAnyUnavailable) && (activeFriendId === 'all' || dayStatus[activeFriendId] === AvailabilityStatus.NONE)) {
+          const isCellColoredInAllView = summary.isAllAvailable || (!summary.isAllAvailable && (summary.availableCount > 0 || summary.unavailableCount > 0));
+          const isColored = activeFriendId === 'all' ? isCellColoredInAllView : (dayStatus[activeFriendId] !== AvailabilityStatus.NONE);
+          
+          if (!isColored) {
             if (isSun) dayLabelColor = isCurrentMonth ? 'text-brand-danger font-black' : 'text-brand-danger/40';
             else if (isSat) dayLabelColor = isCurrentMonth ? 'text-brand-secondary font-black' : 'text-brand-secondary/40';
             else if (!isCurrentMonth) dayLabelColor = 'text-slate-300';
@@ -233,7 +236,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                   onToggleCellDirect(dateStr);
                 }
               }}
-              className={`relative min-h-[72px] sm:min-h-[84px] p-2 rounded-2xl border-2 flex flex-col justify-between cursor-pointer transition-all ${cellBgClass} ${
+              className={`relative min-h-[58px] sm:min-h-[84px] p-1.5 sm:p-2 rounded-xl sm:rounded-2xl border-2 flex flex-col justify-between cursor-pointer transition-all ${cellBgClass} ${
                 isSelected 
                   ? 'ring-4 ring-brand-secondary border-brand-secondary shadow-md scale-[1.01]' 
                   : ''
@@ -241,7 +244,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
             >
               {/* 상단: 날짜 라벨 & 예약 매칭 왕관/별 아이콘 */}
               <div className="flex items-center justify-between">
-                <span className={`text-sm sm:text-base font-sans font-black flex items-center justify-center w-6 h-6 rounded-full ${
+                <span className={`text-xs sm:text-base font-sans font-black flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${
                   isToday && !summary.isAllAvailable && (activeFriendId === 'all' || dayStatus[activeFriendId] === AvailabilityStatus.NONE)
                     ? 'bg-brand-primary text-white shadow-sm' 
                     : dayLabelColor
@@ -252,30 +255,54 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                 {tagBadge}
               </div>
 
-              {/* 하단: 3명의 개별 상태 닷(Dot) 인디케이터 */}
-              <div className="flex items-center justify-center gap-1 mt-1 bg-brand-primary/5 py-1 px-1.5 rounded-lg border border-brand-primary/10">
-                {friends.map((friend) => {
-                  const status = dayStatus[friend.id] || AvailabilityStatus.NONE;
-                  let statusDotClass = 'border-brand-primary bg-white ring-1 ring-brand-primary/20';
-                  let statusTitle = `${friend.name}: 미정`;
+              {/* 하단: 참여 인원에 따른 개별 상태 닷(Dot) 줄 바꿈 인디케이터 */}
+              {(() => {
+                let friendRows: typeof friends[] = [friends];
+                if (friends.length >= 14) {
+                  const rowSize = Math.ceil(friends.length / 3);
+                  friendRows = [
+                    friends.slice(0, rowSize),
+                    friends.slice(rowSize, rowSize * 2),
+                    friends.slice(rowSize * 2)
+                  ];
+                } else if (friends.length >= 7) {
+                  const rowSize = Math.ceil(friends.length / 2);
+                  friendRows = [
+                    friends.slice(0, rowSize),
+                    friends.slice(rowSize)
+                  ];
+                }
 
-                  if (status === AvailabilityStatus.AVAILABLE) {
-                    statusDotClass = 'bg-brand-success ring-2 ring-brand-success/30 scale-110';
-                    statusTitle = `${friend.name}: 가능 (초록색)`;
-                  } else if (status === AvailabilityStatus.UNAVAILABLE) {
-                    statusDotClass = 'bg-brand-danger ring-2 ring-brand-danger/30 scale-110';
-                    statusTitle = `${friend.name}: 불가능 (빨간색)`;
-                  }
+                return (
+                  <div className="flex flex-col gap-0.5 mt-1 bg-brand-primary/5 py-0.5 px-0.5 sm:py-1 sm:px-1 rounded-md sm:rounded-lg border border-brand-primary/10 w-full overflow-hidden">
+                    {friendRows.map((row, rowIndex) => (
+                      <div key={rowIndex} className="flex items-center justify-center gap-0.5 sm:gap-1">
+                        {row.map((friend) => {
+                          const status = dayStatus[friend.id] || AvailabilityStatus.NONE;
+                          let statusDotClass = 'border-brand-primary bg-white ring-1 ring-brand-primary/20';
+                          let statusTitle = `${friend.name}: 미정`;
 
-                  return (
-                    <div
-                      key={friend.id}
-                      className={`w-2.5 h-2.5 rounded-full transition-all border-2 border-brand-primary/20 ${statusDotClass}`}
-                      title={statusTitle}
-                    />
-                  );
-                })}
-              </div>
+                          if (status === AvailabilityStatus.AVAILABLE) {
+                            statusDotClass = 'bg-brand-success ring-1 sm:ring-2 ring-brand-success/30';
+                            statusTitle = `${friend.name}: 가능 (초록색)`;
+                          } else if (status === AvailabilityStatus.UNAVAILABLE) {
+                            statusDotClass = 'bg-brand-danger ring-1 sm:ring-2 ring-brand-danger/30';
+                            statusTitle = `${friend.name}: 불가 (빨간색)`;
+                          }
+
+                          return (
+                            <div
+                              key={friend.id}
+                              className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all border border-brand-primary/10 shrink-0 ${statusDotClass}`}
+                              title={statusTitle}
+                            />
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
             </motion.div>
           );
         })}

@@ -229,6 +229,14 @@ export default function App() {
   // 날짜 선택 시 액션
   const handleSelectDate = (dateStr: string) => {
     setSelectedDateStr(dateStr);
+    
+    // 모바일 기기(폭이 좁은 1024px 미만 뷰포트)에서 사용자가 선택한 날짜의 상세 패널로 자동 스무스 스크롤 포커싱
+    setTimeout(() => {
+      const panel = document.getElementById('date-detail-panel');
+      if (panel && window.innerWidth < 1024) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 120);
   };
 
   // 날짜 마우스 클릭/더블클릭 시 직접 가속 토글 기능
@@ -407,9 +415,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-bg text-brand-primary font-sans p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-brand-bg text-brand-primary font-sans p-2 sm:p-6 lg:p-8">
       {/* 최고 헤더 쉘프 */}
-      <header className="max-w-7xl mx-auto mb-8">
+      <header className="max-w-7xl mx-auto mb-4 sm:mb-8">
         {/* 알림 토스트 베너 */}
         <AnimatePresence>
           {urlLoadedAlert && (
@@ -428,7 +436,7 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        <div className="bg-white rounded-[32px] border-8 border-brand-primary shadow-2xl p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+        <div className="bg-white rounded-2xl sm:rounded-[32px] border-4 sm:border-8 border-brand-primary shadow-2xl p-4 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 relative overflow-hidden">
           {/* 백그라운드 디자인 오브제 */}
           <div className="absolute right-0 top-0 w-64 h-64 bg-brand-secondary/5 rounded-full blur-3xl -z-10 pointer-events-none" />
           
@@ -495,8 +503,20 @@ export default function App() {
                   f.color === 'violet' ? 'bg-violet-500' :
                   f.color === 'amber' ? 'bg-amber-500' :
                   f.color === 'teal' ? 'bg-teal-500' :
-                  f.color === 'cyan' ? 'bg-cyan-500' : 'bg-rose-500';
-                const textClass = f.color === 'emerald' ? 'text-brand-primary' : 'text-white';
+                  f.color === 'cyan' ? 'bg-cyan-500' :
+                  f.color === 'rose' ? 'bg-rose-500' :
+                  f.color === 'sky' ? 'bg-sky-500' :
+                  f.color === 'orange' ? 'bg-orange-500' :
+                  f.color === 'lime' ? 'bg-lime-500' :
+                  f.color === 'fuchsia' ? 'bg-fuchsia-500' :
+                  f.color === 'purple' ? 'bg-purple-500' :
+                  f.color === 'yellow' ? 'bg-yellow-500' :
+                  f.color === 'blue' ? 'bg-blue-500' :
+                  f.color === 'red' ? 'bg-red-500' :
+                  f.color === 'stone' ? 'bg-stone-500' :
+                  f.color === 'green' ? 'bg-green-500' :
+                  f.color === 'slate' ? 'bg-slate-500' : 'bg-zinc-500';
+                const textClass = (f.color === 'emerald' || f.color === 'yellow' || f.color === 'lime') ? 'text-brand-primary' : 'text-white';
                 return (
                   <span
                     key={f.id}
@@ -517,13 +537,13 @@ export default function App() {
       </header>
 
       {/* 메인 레이아웃 본문 (그리드 레이아웃) */}
-      <main className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <main className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8 items-start">
         
         {/* 양쪽으로 나뉜 레이아웃: 왼쪽 카운터 및 컨트롤 스위치 (4/12) */}
         <section className="lg:col-span-4 flex flex-col gap-6" id="left-sidebar">
           
           {/* 🌟 [NEW] 마스터 방 조향 & 인원 규모 설정 제어 보드 */}
-          <div className="bg-white rounded-[32px] border-8 border-brand-primary shadow-2xl p-6 flex flex-col gap-4">
+          <div className="bg-white rounded-2xl sm:rounded-[32px] border-4 sm:border-8 border-brand-primary shadow-2xl p-4 sm:p-6 flex flex-col gap-4">
             <div>
               <div className="flex items-center justify-between">
                 <span className="text-[10px] uppercase font-black tracking-wider text-brand-secondary">ROOM MANAGEMENT</span>
@@ -601,20 +621,20 @@ export default function App() {
               </button>
             </div>
 
-            {/* 인원수 선택 레일 (2명 ~ 8명 동적 인터페이스) */}
+            {/* 인원수 선택 레일 (2명 ~ 20명 동적 인터페이스) */}
             <div className="border-t-4 border-brand-primary/10 pt-4">
               <span className="text-[10px] uppercase font-black tracking-wider text-brand-primary/60 block mb-2">
                 참여 인원 규모 설정 ({roomState.participantCount}명 참여)
               </span>
-              <div className="flex flex-wrap gap-1.5">
-                {[2, 3, 4, 5, 6, 7, 8].map((num) => {
+              <div className="flex flex-wrap gap-1.5 justify-start">
+                {Array.from({ length: 19 }, (_, i) => i + 2).map((num) => {
                   const isSelected = roomState.participantCount === num;
                   return (
                     <button
                       key={num}
                       type="button"
                       onClick={() => handleUpdateParticipantCount(num)}
-                      className={`flex-1 min-w-[36px] py-1.5 text-xs font-black rounded-xl border-2 cursor-pointer transition-all ${
+                      className={`flex-1 min-w-[42px] max-w-[50px] py-1.5 text-[10px] font-black rounded-lg border-2 cursor-pointer transition-all ${
                         isSelected
                           ? 'bg-brand-secondary border-brand-primary text-white scale-[1.03] shadow-inner shadow-indigo-400/30'
                           : 'bg-slate-50 border-brand-primary/10 text-brand-primary/60 hover:bg-slate-100'
@@ -629,7 +649,7 @@ export default function App() {
           </div>
           
           {/* 기입 대상 설정 레일 정보 */}
-          <div className="bg-white rounded-[32px] border-8 border-brand-primary shadow-2xl p-6 flex flex-col gap-4">
+          <div className="bg-white rounded-2xl sm:rounded-[32px] border-4 sm:border-8 border-brand-primary shadow-2xl p-4 sm:p-6 flex flex-col gap-4">
             <div>
               <h3 className="text-base font-black text-brand-primary flex items-center gap-1.5 uppercase tracking-wider">
                 <Layers className="h-5 w-5 text-brand-secondary" />
@@ -739,7 +759,7 @@ export default function App() {
                   onClearDay={handleClearDay}
                 />
               ) : (
-                <div className="bg-white rounded-[32px] border-8 border-dashed border-brand-primary p-8 flex flex-col items-center justify-center text-center text-brand-primary/45 min-h-[300px] shadow-2xl">
+                <div className="bg-white rounded-2xl sm:rounded-[32px] border-4 sm:border-8 border-dashed border-brand-primary p-6 sm:p-8 flex flex-col items-center justify-center text-center text-brand-primary/45 min-h-[300px] shadow-2xl">
                   <Calendar className="h-10 w-10 text-brand-primary/40 mb-2.5" />
                   <p className="text-xs font-black leading-relaxed text-brand-primary/70">
                     달력의 날짜를 한 번 눌러 보세요!<br />

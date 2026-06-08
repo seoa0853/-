@@ -61,6 +61,18 @@ export const DateDetailPanel: React.FC<DateDetailPanelProps> = ({
     teal: { bg: 'bg-teal-500/10 border-teal-500/20', border: 'border-teal-500', text: 'text-brand-primary' },
     cyan: { bg: 'bg-cyan-500/10 border-cyan-500/20', border: 'border-cyan-500', text: 'text-brand-primary' },
     rose: { bg: 'bg-rose-500/10 border-rose-500/20', border: 'border-rose-500', text: 'text-brand-primary' },
+    sky: { bg: 'bg-sky-500/10 border-sky-500/20', border: 'border-sky-500', text: 'text-brand-primary' },
+    orange: { bg: 'bg-orange-500/10 border-orange-500/20', border: 'border-orange-500', text: 'text-brand-primary' },
+    lime: { bg: 'bg-lime-500/10 border-lime-500/20', border: 'border-lime-500', text: 'text-brand-primary' },
+    fuchsia: { bg: 'bg-fuchsia-500/10 border-fuchsia-500/20', border: 'border-fuchsia-500', text: 'text-brand-primary' },
+    purple: { bg: 'bg-purple-500/10 border-purple-500/20', border: 'border-purple-500', text: 'text-brand-primary' },
+    yellow: { bg: 'bg-yellow-500/10 border-yellow-500/20', border: 'border-yellow-500', text: 'text-brand-primary' },
+    blue: { bg: 'bg-blue-500/10 border-blue-500/20', border: 'border-blue-500', text: 'text-brand-primary' },
+    red: { bg: 'bg-red-500/10 border-red-500/20', border: 'border-red-500', text: 'text-brand-primary' },
+    stone: { bg: 'bg-stone-500/10 border-stone-500/20', border: 'border-stone-500', text: 'text-brand-primary' },
+    green: { bg: 'bg-green-500/10 border-green-500/20', border: 'border-green-500', text: 'text-brand-primary' },
+    slate: { bg: 'bg-slate-500/10 border-slate-500/20', border: 'border-slate-500', text: 'text-brand-primary' },
+    zinc: { bg: 'bg-zinc-500/10 border-zinc-500/20', border: 'border-zinc-500', text: 'text-brand-primary' },
   };
 
   return (
@@ -68,7 +80,7 @@ export const DateDetailPanel: React.FC<DateDetailPanelProps> = ({
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 15 }}
-      className="bg-white rounded-[32px] border-8 border-brand-primary shadow-2xl p-6"
+      className="bg-white rounded-2xl sm:rounded-[32px] border-4 sm:border-8 border-brand-primary shadow-2xl p-4 sm:p-6"
       id="date-detail-panel"
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b-4 border-brand-primary">
@@ -123,10 +135,10 @@ export const DateDetailPanel: React.FC<DateDetailPanelProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+      <div className="flex flex-col gap-6 mt-6">
         
-        {/* 왼쪽 7: 3인의 일정 정보 라디오 스위치 */}
-        <div className="lg:col-span-7 flex flex-col gap-3">
+        {/* 친구별 가능 여부 실시간 등록 (Full-width) */}
+        <div className="flex flex-col gap-3">
           <h4 className="text-xs font-black text-brand-primary/70 uppercase tracking-wider mb-1 flex items-center gap-1">
             <UserCheck className="h-4 w-4" />
             <span>친구별 가능 여부 실시간 등록</span>
@@ -139,21 +151,33 @@ export const DateDetailPanel: React.FC<DateDetailPanelProps> = ({
             return (
               <div
                 key={friend.id}
-                className={`flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-2xl border-2 transition-all ${
+                className={`flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-3.5 rounded-xl sm:rounded-2xl border-2 transition-all gap-2 sm:gap-4 ${
                   status !== AvailabilityStatus.NONE 
                     ? theme.bg + ' ' + theme.border
                     : 'bg-white border-2 border-slate-200 shadow-sm'
                 }`}
               >
-                <div className="flex items-center gap-2.5 mb-2.5 sm:mb-0">
-                  <div className={`w-3.5 h-3.5 rounded-full border-2 border-brand-primary/20 ${
+                <div className="flex items-center gap-2.5">
+                  <div className={`w-3.5 h-3.5 rounded-full border-2 border-brand-primary/20 shrink-0 ${
                     friend.color === 'indigo' ? 'bg-brand-secondary' :
                     friend.color === 'emerald' ? 'bg-brand-success' :
                     friend.color === 'pink' ? 'bg-brand-danger' :
                     friend.color === 'violet' ? 'bg-violet-500' :
                     friend.color === 'amber' ? 'bg-amber-500' :
                     friend.color === 'teal' ? 'bg-teal-500' :
-                    friend.color === 'cyan' ? 'bg-cyan-500' : 'bg-rose-500'
+                    friend.color === 'cyan' ? 'bg-cyan-500' :
+                    friend.color === 'rose' ? 'bg-rose-500' :
+                    friend.color === 'sky' ? 'bg-sky-500' :
+                    friend.color === 'orange' ? 'bg-orange-500' :
+                    friend.color === 'lime' ? 'bg-lime-500' :
+                    friend.color === 'fuchsia' ? 'bg-fuchsia-500' :
+                    friend.color === 'purple' ? 'bg-purple-500' :
+                    friend.color === 'yellow' ? 'bg-yellow-500' :
+                    friend.color === 'blue' ? 'bg-blue-500' :
+                    friend.color === 'red' ? 'bg-red-500' :
+                    friend.color === 'stone' ? 'bg-stone-500' :
+                    friend.color === 'green' ? 'bg-green-500' :
+                    friend.color === 'slate' ? 'bg-slate-500' : 'bg-zinc-500'
                   }`} />
                   <span className="text-sm font-black text-brand-primary">
                     {friend.name}
@@ -162,19 +186,19 @@ export const DateDetailPanel: React.FC<DateDetailPanelProps> = ({
                 </div>
 
                 {/* 3지선다 버튼 그룹 */}
-                <div className="flex items-center gap-1 bg-white p-1 rounded-xl border-2 border-brand-primary shadow-sm self-end sm:self-auto">
+                <div className="flex items-center gap-1 bg-white p-1 rounded-xl border-2 border-brand-primary shadow-sm w-full sm:w-auto justify-between sm:justify-start">
                   
                   {/* 가능 (초록색) */}
                   <button
                     type="button"
                     onClick={() => onUpdateStatus(friend.id, AvailabilityStatus.AVAILABLE)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition-all ${
+                    className={`flex-1 sm:flex-none px-2.5 py-2 sm:px-3 sm:py-1.5 rounded-lg text-xs font-black flex items-center justify-center gap-1 cursor-pointer transition-all ${
                       status === AvailabilityStatus.AVAILABLE
                         ? 'bg-brand-success text-brand-primary border-2 border-brand-primary shadow-xs'
                         : 'text-brand-primary/60 hover:bg-slate-50'
                     }`}
                   >
-                    <Check className="h-3.5 w-3.5 stroke-[3]" />
+                    <Check className="h-3.5 w-3.5 stroke-[3] shrink-0" />
                     <span>가능</span>
                   </button>
 
@@ -182,13 +206,13 @@ export const DateDetailPanel: React.FC<DateDetailPanelProps> = ({
                   <button
                     type="button"
                     onClick={() => onUpdateStatus(friend.id, AvailabilityStatus.UNAVAILABLE)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition-all ${
+                    className={`flex-1 sm:flex-none px-2.5 py-2 sm:px-3 sm:py-1.5 rounded-lg text-xs font-black flex items-center justify-center gap-1 cursor-pointer transition-all ${
                       status === AvailabilityStatus.UNAVAILABLE
                         ? 'bg-brand-danger text-white border-2 border-brand-primary shadow-xs'
                         : 'text-brand-primary/60 hover:bg-slate-50'
                     }`}
                   >
-                    <X className="h-3.5 w-3.5 stroke-[3]" />
+                    <X className="h-3.5 w-3.5 stroke-[3] shrink-0" />
                     <span>불가</span>
                   </button>
 
@@ -196,13 +220,13 @@ export const DateDetailPanel: React.FC<DateDetailPanelProps> = ({
                   <button
                     type="button"
                     onClick={() => onUpdateStatus(friend.id, AvailabilityStatus.NONE)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition-all ${
+                    className={`flex-1 sm:flex-none px-2.5 py-2 sm:px-3 sm:py-1.5 rounded-lg text-xs font-black flex items-center justify-center gap-1 cursor-pointer transition-all ${
                       status === AvailabilityStatus.NONE
                         ? 'bg-brand-primary text-white border-2 border-brand-primary'
                         : 'text-brand-primary/40 hover:bg-slate-50'
                     }`}
                   >
-                    <HelpCircle className="h-3.5 w-3.5" />
+                    <HelpCircle className="h-3.5 w-3.5 shrink-0" />
                     <span>미정</span>
                   </button>
                 </div>
@@ -211,20 +235,20 @@ export const DateDetailPanel: React.FC<DateDetailPanelProps> = ({
           })}
         </div>
 
-        {/* 오른쪽 5: 날짜 전용 메모 기능 */}
-        <div className="lg:col-span-5 flex flex-col gap-3">
+        {/* 날짜 전용 메모 기능 (아래로 이동 및 Full-width) */}
+        <div className="flex flex-col gap-3">
           <h4 className="text-xs font-black text-brand-primary/70 uppercase tracking-wider mb-1 flex items-center gap-1">
             <ClipboardSignature className="h-3.5 w-3.5" />
             <span>이 날짜의 계획 ∙ 메모 적기</span>
           </h4>
 
-          <div className="bg-brand-bg p-4 rounded-2xl border-4 border-brand-primary flex flex-col gap-3 h-full">
+          <div className="bg-brand-bg p-4 rounded-2xl border-4 border-brand-primary flex flex-col gap-3">
             <textarea
               id="date-notes-textarea"
               value={localNotes}
               onChange={(e) => setLocalNotes(e.target.value)}
               placeholder="예: 강남역 곱창집! 7시 만남, 장소나 회비 예약 같은 세부 일정을 적어보세요."
-              className="w-full flex-1 p-3 text-xs text-brand-primary bg-white border-2 border-brand-primary rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:border-brand-secondary min-h-[96px] resize-none leading-relaxed font-bold"
+              className="w-full p-3 text-xs text-brand-primary bg-white border-2 border-brand-primary rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:border-brand-secondary min-h-[96px] resize-none leading-relaxed font-bold"
             />
             
             <button
